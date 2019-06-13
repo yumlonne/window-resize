@@ -6,6 +6,9 @@ import Time
 import Browser.Events
 import Element exposing (..)
 import Element.Input as Input
+import Element.Background as Background
+import Element.Border as Boader
+import Element.Font as Font
 import Html exposing (Html)
 
 
@@ -149,29 +152,32 @@ body : Model -> List (Html Msg)
 body model =
     List.singleton <|
         layout [] <|
-            column []
-                [ Input.checkbox []
+            column [ width fill, height fill, spacing 14]
+                [ Input.checkbox [ centerX, width <| px 70 ]
                     { onChange = OnClickWidthCheckbox
                     , icon = Input.defaultCheckbox
                     , checked = model.resizeWidth
-                    , label = Input.labelRight [] <| text "よこ"
+                    , label = Input.labelRight [ centerX ] <| text "よこ"
                     }
-                , Input.checkbox []
+                , Input.checkbox [ centerX, width <| px 70 ]
                     { onChange = OnClickHeightCheckbox
                     , icon = Input.defaultCheckbox
                     , checked = model.resizeHeight
-                    , label = Input.labelRight [] <| text "たて"
+                    , label = Input.labelRight [ centerX ] <| text "たて"
                     }
-                , Input.slider []
+                , el [ centerX ] <| Input.slider [ width <| px 150 ]
                     { onChange = OnChangeVelocity
-                    , label = Input.labelBelow [] <| text "速さ"
+                    , label = Input.labelBelow [ centerX ] <| text "←速さ→"
                     , min = 0.5
                     , max = 1.5
                     , value = model.velocity
                     , thumb = Input.defaultThumb
                     , step = Just 0.1
                     }
-                , Input.button []
+                , Input.button [ centerX, width <| px 150, height <| px 75, Background.color <| rgb255 180 70 180 ]
                     { onPress = Just OnClickPopupButton
-                    , label = el [] (text "popup!")}
+                    , label = el [ centerX, centerY, Font.color <| rgb 0 0 0 ] (text "popup!")
+                    }
+                , el [ centerX, Font.color <| rgb255 230 40 40 ] <|
+                    text "※PCでフルスクリーンじゃないブラウザから押してね!"
                 ]
