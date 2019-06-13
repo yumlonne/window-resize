@@ -68,3 +68,5 @@ node_modules/
 # my settings
 *.swp
 elm.js
+
+elm-stuff/
